@@ -1,32 +1,34 @@
-import axios from "axios";
 import React, {useState} from "react";
-import {IntakeForm} from "./components/IntakeForm";
+import {IntakeForm} from "./components/Intake/IntakeForm";
+import axios from "axios";
+import {ReadAirport} from "./components/Read/ReadAirport";
+import {ReadWeather} from "./components/Read/ReadWeather";
 
-const baseURL = "http://localhost:3000/airports/kaus.json";
+const airportBaseURL = "http://localhost:3000/airports/";
+const weatherBaseURL = "http://localhost:3000/weather/";
+
 
 export default function App() {
-    const [post, setPost] = React.useState(null);
     const [weather, setWeather] = useState([]);
-
+    const [post, setPost] = React.useState({});
+    const [post2, setPost2] = React.useState({});
     const addWeatherHandler = (weather) => {
         setWeather((prevWeather) => {
             return [weather, ...prevWeather];
         });
-    };
-
-    React.useEffect(() => {
-        axios.get(baseURL).then((response) => {
+        axios.get(airportBaseURL + weather + ".json").then((response) => {
             setPost(response.data);
         });
-    }, []);
-
-    if (!post) return null;
-    console.log(post)
-    return (
+        axios.get(weatherBaseURL + weather + ".json").then((response) => {
+            setPost2(response.data);
+        });
+    }
+    if (weather === []) return <IntakeForm onSubmit={addWeatherHandler}/>;
+    else return (
         <div>
             <IntakeForm onSubmit={addWeatherHandler}/>
-            <h1>{post.city}</h1>
-            <h1>{post.airportAccess}</h1>
+            <ReadAirport airportInfo={post}/>
+            <ReadWeather weatherInfo={post2}/>
         </div>
     );
 }

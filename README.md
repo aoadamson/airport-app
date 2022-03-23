@@ -30,3 +30,23 @@ The data sources for this exercise can be accessed while the development server 
     - Ex. http://localhost:3000/airports/kaus.json
 - `Weather Conditions` can be obtained at:  http://localhost:3000/weather/<airport_identifier>.json
     - Ex. http://localhost:3000/weather/kaus.json
+
+# Austin's README
+
+I completed the exercise with one problem still lingering.
+I am messing up the hook and can't find it while debugging.
+I would love to pair during next round of the interview on what I messed up on.
+Also feel free to submit a code review/pull request if it's something obvious!
+
+## Libraries used:
+* [React Testing Library](https://testing-library.com/)
+* [Axios for reaching api](https://axios-http.com/docs/intro)
+
+## Run the app locally
+
+1. `npm install`
+2. `npm start`
+
+## Test the app locally
+
+`npm test` or run it in your IDE
